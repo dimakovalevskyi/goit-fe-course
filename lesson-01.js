@@ -18,10 +18,10 @@
 // ```js
 // const apples = 47;
 // const grapes = 135;
-// const total = ;
-// console.log(total)
-// const diff = ;
-// console.log(diff)
+// const total = apples + grapes;
+// console.log('total', total);
+// const diff = apples - grapes;
+// console.log('diff', diff);
 // ```
 
 // ## Example 2 - Комбіновані оператори
@@ -30,8 +30,8 @@
 
 // ```js
 // let students = 100;
-// students = students + 50;
-// console.log(students);
+// students += 50;
+// console.log('students', students);
 // ```
 
 // ## Example 3 - Пріоритет операторів
@@ -40,8 +40,8 @@
 // `result`.
 
 // ```js
-// const result = 108 + 223 - 2 * 5;
-// console.log(result);
+// const result = 108 + 223 - (2 * 5);
+// console.log('result', result);
 // ```
 
 // ## Example 4 - Клас Math
@@ -51,7 +51,12 @@
 // `Math.round()`. Перевір що буде в консолі при значеннях `27.3` та `27.9`.
 
 // ```js
-// const value = 27.5;
+// const value = 27;
+
+// console.log('original', value);
+// console.log('floor', Math.floor(value));
+// console.log('ceil', Math.ceil(value));
+// console.log('round', Math.round(value));
 // ```
 
 // ## Example 5 - Шаблонні рядки
@@ -61,9 +66,9 @@
 
 // ```js
 // const companyName = 'Cyberdyne Systems';
-// const repairBots = 150;
-// const defenceBots = 50;
-// const message = ``;
+// const repairBots = 160;
+// const defenceBots = 0;
+// const message = `${companyName} has ${repairBots + defenceBots} bots in stock`;
 // console.log(message); // "Cyberdyne Systems has 200 bots in stock"
 // ```
 
@@ -72,19 +77,21 @@
 // Напиши скрипт, який розраховує індекс маси тіла людини. Для цього
 // необхідно розділити вагу в кілограмах на квадрат висоти людини у метрах.
 
-// Вага та висота зберігаються у змінних `weight` та `height`, але не як числа, а в
-// вигляді рядків (спеціально для завдання). Не цілі числа можуть бути задані у вигляді
-// `24.7` або `24,7`, тобто як роздільник дробової частини може бути
-// кома.
+// Вага та висота зберігаються у змінних `weight` та `height`, але не як числа, 
+// а в вигляді рядків (спеціально для завдання). Не цілі числа можуть бути 
+//задані у вигляді `24.7` або `24,7`, тобто як роздільник дробової 
+// частини може бути кома.
 
 // Індекс маси тіла необхідно округлити до однієї цифри після коми;
 
 // ```js
 // let weight = '88,3';
-// let height = '1.75';
+// const height = Number('1.75');
 
-// const bmi = ;
-// console.log(bmi); // 28.8
+// weight = weight.replace(',', '.');
+
+// const bmi = weight / (Math.pow(height, 2));
+// console.log(bmi.toFixed(1)); // 28.8
 // ```
 
 // ## Example 7 - Оператори порівняння та приведення типів
@@ -148,6 +155,8 @@
 
 // console.log(null || (2 && 3) || 4);
 // ```
+
+// Поясніть як працює оператор '!'
 
 // ## Example 9 - Значення за замовчуванням та оператор нульового злиття
 
