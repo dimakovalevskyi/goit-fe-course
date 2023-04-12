@@ -19,6 +19,19 @@
 //   hobby: 'html',
 //   premium: true,
 // };
+
+// user.mood = 'happy';
+// user.hobby = 'skydiving';
+// user['premium'] = false;
+
+// console.log('user', user);
+
+// let userKeys = Object.keys(user);
+// console.group();
+// for (let key of userKeys) {
+//     console.log(`${key}:${user[key]}`);
+// }
+// console.groupEnd();
 // ```
 
 // ## Example 2 - метод Object.values()
@@ -35,6 +48,12 @@
 //   Ann: 160,
 //   Pete: 130,
 // };
+
+// let sum = 0;
+// for (let salary of Object.values(salaries)) {
+//     sum += salary;
+// }
+// console.log('sum', sum);
 // ```
 
 // ## Example 3 - Масив об'єктів
@@ -46,12 +65,25 @@
 // ### Код
 
 // ```js
+// function calcTotalPrice(stones, stoneName) {
+//     for (let stone of stones) {
+//         if (stone.name === stoneName) {
+//             return stone.price * stone.quantity;
+//         }
+//     }
+//     return null;
+// }
+
 // const stones = [
 //   { name: 'Смарагд', price: 1300, quantity: 4 },
 //   { name: 'Діамант', price: 2700, quantity: 3 },
 //   { name: 'Сапфір', price: 400, quantity: 7 },
 //   { name: 'Щебінь', price: 200, quantity: 2 },
 // ];
+
+// console.log(calcTotalPrice(stones, 'Сапфір'));
+// console.log(calcTotalPrice(stones, 'Смарагд'));
+// console.log(calcTotalPrice(stones, 'Рубін'));
 // ```
 
 // ## Example 4 - Комплексні завдання
@@ -60,7 +92,7 @@
 // в якому необхідно реалізувати методи для роботи з балансом та історією
 // транзакцій.
 
-// ```js
+// // ```js
 // /*
 //  * Типів транзакцій всього два.
 //  * Можна покласти чи зняти гроші з рахунку.
@@ -85,7 +117,13 @@
 //    * Метод створює та повертає об'єкт транзакції.
 //    * Приймає суму та тип транзакції.
 //    */
-//   createTransaction(amount, type) {},
+//   createTransaction(amount, type) {
+//     return {
+//         id: this.transactions.length + 1,
+//         type,
+//         amount,
+//     };
+//   },
 
 //   /*
 //    * Метод, що відповідає за додавання суми до балансу.
@@ -93,7 +131,12 @@
 //    * Викликає createTransaction для створення об'єкта транзакції
 //    * після чого додає його до історії транзакцій
 //    */
-//   deposit(amount) {},
+//   deposit(amount) {
+//     let transaction = this.createTransaction(amount, Transaction.DEPOSIT);
+
+//     this.transactions.push(transaction);
+//     this.balance += amount;
+//   },
 
 //   /*
 //    * Метод, що відповідає за зняття суми з балансу.
@@ -104,22 +147,52 @@
 //    * Якщо amount більше ніж поточний баланс, виводь повідомлення
 //    * про те, що зняття такої суми не можливе, недостатньо коштів.
 //    */
-//   withdraw(amount) {},
+//   withdraw(amount) {
+//     if (amount > this.balance) {
+//         console.error('Недостатньо коштів');
+//         return;
+//     }
+//     let transaction = this.createTransaction(amount, Transaction.WITHDRAW);
+//     this.transactions.push(transaction);
+//     this.balance -= amount;
+//   },
 
 //   /*
 //    * Метод повертає поточний баланс
 //    */
-//   getBalance() {},
+//   getBalance() {
+//     return this.balance;
+//   },
 
 //   /*
 //    * Метод шукає та повертає об'єкт транзакції по id
 //    */
-//   getTransactionDetails(id) {},
+//   getTransactionDetails(id) {
+//     for (let transaction of this.transactions) {
+//         if (transaction.id === id) {
+//             return transaction;
+//         }
+//     }
+//     return null;
+//   },
 
 //   /*
 //    * Метод повертає кількість коштів
 //    * певного типу транзакції з усієї історії транзакцій
 //    */
-//   getTransactionTotal(type) {},
+//   getTransactionTotal(type) {
+//     let sum = 0;
+//     for (let transaction of this.transactions) {
+//         if (transaction.type === type) {
+//             sum += transaction.amount;
+//         }
+//     }
+//     return sum;
+//   },
 // };
-// ```
+
+// account.deposit(1000);
+// account.withdraw(300);
+// account.withdraw(100);
+// account.deposit(200);
+// // ```
