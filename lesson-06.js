@@ -92,17 +92,13 @@
 
 // ## Example 4 - Деструктуризація
 
-// Перепиши функцію так, щоб вона приймала об'єкт параметрів із властивостями
+// Допиши функцію так, щоб вона приймала об'єкт параметрів із властивостями
 // `companyName` та `stock` та виводила репорт про кількість товарів на складі будь-якої
 // компанії.
 
 // ```js
-// // Рішення
-// function getStockReport({ companyName, stock }) {
+// function getStockReport(companyName) {
 //   let total = 0;
-//   for (const value of Object.values(stock)) {
-//     total += value;
-//   }
 //   return `${companyName} has ${total} items in stock`;
 // }
 
@@ -135,14 +131,8 @@
 // значенням "default" якщо в `partialContact` немає такої властивості.
 
 // ```js
-// // Рішення
 // function createContact(partialContact) {
-//   return {
-//     list: 'default',
-//     ...partialContact,
-//     id: generateId(),
-//     createdAt: Date.now(),
-//   };
+//   return {};
 // }
 
 // console.log(
@@ -170,12 +160,8 @@
 // `fullName`, замість `firstName` та `lastName`.
 
 // ```js
-// // Рішення
-// function transformUsername({ firstName, lastName, ...otherProps }) {
-//   return {
-//     fullName: `${firstName} ${lastName}`,
-//     ...otherProps,
-//   };
+// function transformUserName(user) {
+//   return {};
 // }
 
 // console.log(
