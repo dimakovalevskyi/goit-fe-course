@@ -13,8 +13,33 @@
 //   вартість товару в консоль
 
 // ```js
-// createProduct({ name: '🍎', price: 30, quantity: 3 }, logProduct);
-// createProduct({ name: '🍋', price: 20, quantity: 5 }, logTotalPrice);
+// function logProduct(product) {
+//     console.log(product);
+// }
+// function logTotalPrice(product) {
+//     console.log(product.price * product.quantity);
+// }
+// function alertTotalPrice(product) {
+//     alert(product.price * product.quantity);
+// }
+
+// function createProduct(obj, callback) {
+//     let product = {
+//         ...obj,
+//         id: Math.random().toString(36).substring(2),
+//     };
+//     callback(product);
+//     return product;
+// }
+// let product1 = { name: '🍎', price: 30, quantity: 3 };
+// let product2 = { name: '🍋', price: 20, quantity: 5 };
+
+// createProduct(product1, logProduct);
+// createProduct(product1, logTotalPrice);
+
+// createProduct(product2, logProduct);
+// createProduct(product2, logTotalPrice);
+// createProduct(product2, alertTotalPrice);
 // ```
 
 // ## Example 2 - Коллбек функції
@@ -37,20 +62,45 @@
 //   username: 'Jacob',
 //   balance: 400,
 //   withdraw(amount, onSuccess, onError) {
-//     this.balance -= amount;
+//     if (amount > TRANSACTION_LIMIT) {
+//         onError('Перевищено ліміт транзакції');
+//     } else if (amount > this.balance) {
+//         onError('На рахунку не достатньо коштів');
+//     } else {
+//         this.balance -= amount;
+//         onSuccess();
+//     }
 //   },
 //   deposit(amount, onSuccess, onError) {
-//     this.balance += amount;
+//     if (amount > TRANSACTION_LIMIT) {
+//         onError('Перевищено ліміт транзакції');
+//     } else if (amount <= 0) {
+//         onError('Розмір транзакції має бути додатнім');
+//     } else {
+//         this.balance += amount;
+//         onSuccess();
+//     }
 //   },
 // };
+
+// function handleSuccess() {
+//     console.log('Операція успішна!');
+// }
+// function handleError(errorMessage) {
+//     console.error(errorMessage);
+// }
+
+// console.log('Balance before:', account.balance);
 
 // account.withdraw(2000, handleSuccess, handleError);
 // account.withdraw(600, handleSuccess, handleError);
 // account.withdraw(300, handleSuccess, handleError);
-// account.deposit(1700, handleSuccess, handleError);
+// account.deposit(100, handleSuccess, handleError);
 // account.deposit(0, handleSuccess, handleError);
 // account.deposit(-600, handleSuccess, handleError);
 // account.deposit(600, handleSuccess, handleError);
+
+// console.log('Balance after:', account.balance);
 // ```
 
 // ## Example 3 - Коллбек функції
@@ -61,31 +111,45 @@
 // виклику коллбека.
 
 // ```js
-// console.log(
-//   each([64, 49, 36, 25, 16], function (value) {
+// function each(array, callback) {
+//     let newArray = [];
+//     for (let item of array) {
+//         newArray.push(callback(item));
+//     }
+//     return newArray;
+// }
+
+// function multiplyTwo(value) {
 //     return value * 2;
-//   }),
-// );
-// console.log(
-//   each([64, 49, 36, 25, 16], function (value) {
+// }
+// function minus10(value) {
 //     return value - 10;
-//   }),
-// );
-// console.log(
-//   each([64, 49, 36, 25, 16], function (value) {
+// }
+// function getSqrt(value) {
 //     return Math.sqrt(value);
-//   }),
-// );
-// console.log(
-//   each([1.5, 2.1, 16.4, 9.7, 11.3], function (value) {
+// }
+// function ceil(value) {
 //     return Math.ceil(value);
-//   }),
-// );
-// console.log(
-//   each([1.5, 2.1, 16.4, 9.7, 11.3], function (value) {
+// }
+// function floor(value) {
 //     return Math.floor(value);
-//   }),
-// );
+// }
+
+// let originalArray = [64, 49, 36, 25, 16];
+// console.log('originalArray', originalArray);
+
+// let multipliedArray = each(originalArray, multiplyTwo);
+// console.log('multipliedArray', multipliedArray);
+
+// console.log('minus10:', each(originalArray, minus10));
+// console.log('getSqrt:', each(originalArray, getSqrt));
+
+
+// let originalArray2 = [1.5, 2.1, 16.4, 9.7, 11.3];
+// console.log('originalArray2', originalArray2);
+
+// console.log('ceil:', each(originalArray2, ceil));
+// console.log('floor:', each(originalArray2, floor));
 // ```
 
 // ## Example 4 - Стрілочні функції
@@ -93,6 +157,23 @@
 // Виконайте рефакторинг коду Example 1 за допомогою стрілочних функцій.
 
 // ```js
+// function createProduct(obj, callback) {
+//     let product = {
+//         ...obj,
+//         id: Math.random().toString(36).substring(2),
+//     };
+//     callback(product);
+//     return product;
+// }
+// let product1 = { name: '🍎', price: 30, quantity: 3 };
+// let product2 = { name: '🍋', price: 20, quantity: 5 };
+
+// createProduct(product1, value => console.log(value));
+// createProduct(product1, value => console.log(value.price * value.quantity));
+
+// createProduct(product2, value => console.log(value));
+// createProduct(product2, value => console.log(value.price * value.quantity));
+// createProduct(product2, value => alert(value.price * value.quantity));
 // ```
 
 // ## Example 5 - Інлайн стрілочні функції
@@ -100,6 +181,29 @@
 // Виконайте рефакторинг коду Example 3 за допомогою стрілочних функцій.
 
 // ```js
+// function each(array, callback) {
+//     let newArray = [];
+//     for (let item of array) {
+//         newArray.push(callback(item));
+//     }
+//     return newArray;
+// }
+
+// let originalArray = [64, 49, 36, 25, 16];
+// console.log('originalArray', originalArray);
+
+// let multipliedArray = each(originalArray, value => value * 2);
+// console.log('multipliedArray', multipliedArray);
+
+// console.log('minus10:', each(originalArray, value => value - 10));
+// console.log('getSqrt:', each(originalArray, value => Math.sqrt(value)));
+
+
+// let originalArray2 = [1.5, 2.1, 16.4, 9.7, 11.3];
+// console.log('originalArray2', originalArray2);
+
+// console.log('ceil:', each(originalArray2, value => Math.ceil(value)));
+// console.log('floor:', each(originalArray2, value => Math.floor(value)));
 // ```
 
 // ## Example 6 - Метод forEach
@@ -108,10 +212,10 @@
 
 // ```js
 // function logItems(items) {
-//   console.log(items);
-//   for (let i = 0; i < items.length; i += 1) {
-//     console.log(`${i + 1} - ${items[i]}`);
-//   }
+//     console.log(items);
+//     items.forEach((element, index) => {
+//         console.log(`${index + 1} - ${element}`);
+//     });
 // }
 
 // logItems(['Mango', 'Poly', 'Ajax']);
@@ -126,9 +230,9 @@
 // function printContactsInfo({ names, phones }) {
 //   const nameList = names.split(',');
 //   const phoneList = phones.split(',');
-//   for (let i = 0; i < nameList.length; i += 1) {
+//   nameList.forEach((item, i) => {
 //     console.log(`${nameList[i]}: ${phoneList[i]}`);
-//   }
+//   });
 // }
 
 // printContactsInfo({
@@ -144,9 +248,7 @@
 // ```js
 // function calсulateAverage(...args) {
 //   let total = 0;
-//   for (let i = 0; i < args.length; i++) {
-//     total += args[i];
-//   }
+//   args.forEach(item => total += item);
 //   return total / args.length;
 // }
 
