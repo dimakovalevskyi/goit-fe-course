@@ -18,26 +18,106 @@
 // кількість постів, які потрібно додати користувачеві.
 
 // ```js
+// class User {
+//     constructor({ name, age, numberOfPosts = 0, topics = [] }) {
+//         this.name = name;
+//         this.age = age;
+//         this.numberOfPosts = numberOfPosts;
+//         this.topics = topics;
+//     }
+
+//     getInfo() {
+//         return `User ${this.name} is ${this.age} years old and has ${this.numberOfPosts} posts`;
+//     }
+
+//     addPostCount(value) {
+//         return this.numberOfPosts += value;
+//     }
+// }
+
 // const mango = new User({
-//   name: 'mango@mail.com',
-//   age: 24,
-//   numberOfPosts: 20,
-//   topics: ['tech', 'cooking'],
+//     name: 'Mango',
+//     age: 24,
+//     numberOfPosts: 20,
+//     topics: ['tech', 'cooking'],
 // });
+
+// console.log('mango', mango);
+
 // console.log(mango.getInfo()); // User mango@mail.com is 24 years old and has 20 posts
-// mango.updatePostCount(5);
+// mango.addPostCount(5);
 // console.log(mango.getInfo()); // User mango@mail.com is 24 years old and has 25 posts
 
 // const poly = new User({
-//   name: 'poly@mail.com',
+//   name: 'Poly',
 //   age: 19,
 //   numberOfPosts: 17,
 //   topics: ['sports', 'gaming', 'health'],
 // });
 // console.log(poly.getInfo()); // User poly@mail.com is 19 years old and has 17 posts
-// poly.updatePostCount(4);
+// poly.addPostCount(4);
 // console.log(poly.getInfo()); // User poly@mail.com is 19 years old and has 21 posts
 // ```
+
+// class User {
+//     static Gender = {
+//         Male: 'm',
+//         Female: 'f',
+//         Other: 'o',
+//     };
+
+//     #birthDate;
+//     #email;
+
+//     constructor({ firstName, lastName, email, gender, birthDate }) {
+//         this.firstName = firstName;
+//         this.lastName = lastName;
+
+//         this.#email = email;
+
+//         this.gender = gender; // 'm' or 'f'
+
+//         this.#birthDate = birthDate;
+//     }
+
+//     get fullName() {
+//         return this.firstName + ' ' + this.lastName;
+//     }
+
+//     get birthDate() {
+//         if (this.gender === User.Gender.Male) {
+//             return this.#birthDate;
+//         }
+//         return this.#birthDate.substring(0, 5);
+//     }
+
+//     get email() {
+//         return this.#email;
+//     }
+
+//     set email(value) {
+//         if (value.includes('@')) {
+//             this.#email = value;
+//         } else {
+//             console.error('invalid value');
+//         }
+//     }
+// }
+
+// let dima = new User({
+//     firstName: 'Dima',
+//     lastName: 'Kovalevskyi',
+//     email: 'dimakovalevskyi@gmail.com',
+//     gender: User.Gender.Male,
+//     birthDate: '20.08.1996',
+// });
+
+// let vika = new User({
+//     firstName: 'Viktoria',
+//     lastName: 'Kovalevska',
+//     gender: User.Gender.Female,
+//     birthDate: '23.03.1997',
+// });
 
 // ## Example 2 - Сховище
 
@@ -96,34 +176,73 @@
 // Замітка це об'єкт із властивостями `text` та `priority`. Додай класу статичну
 // властивість `Priority`, у якому зберігатиметься об'єкт із пріоритетами.
 
-// ```js
-// {
-//   LOW: 'low',
-//   NORMAL: 'normal',
-//   HIGH: 'high'
+// class Note {
+//     static Priority = {
+//         LOW: 'low',
+//         NORMAL: 'normal',
+//         HIGH: 'high',
+//     };
+
+//     constructor (text, priority) {
+//         this.text = text;
+//         this.priority = priority;
+
+//         this.createdAt = new Date();
+//         this.id = Math.round(Math.random() * 100000);
+//     }
+
+//     update({ text, priority }) {
+//         if (text) {
+//             this.text = text;
+//         }
+//         if (priority) {
+//             this.priority = priority;
+//         }
+//     }
 // }
-// ```
 
-// Додай методи `addNote(note)`, `removeNote(text)` та
-// `updatePriority(text, newPriority)`.
+// class Notes {
+//     constructor(name, items = []) {
+//         this.name = name;
+//         this.items = items;
+//     }
 
-// ```js
-// const myNotes = new Notes([]);
+//     addNote({ text, priority }) {
+//         let newNote = new Note(text, priority);
+//         this.items.push(newNote);
+//     }
 
-// myNotes.addNote({ text: 'Моя перша замітка', priority: Notes.Priority.LOW });
-// console.log(myNotes.items);
+//     removeNote(noteId) {
+//         let noteIndex = this.items.findIndex(note => note.id === noteId);
+//         if (noteIndex > -1) {
+//             this.items.splice(noteIndex, 1);
+//         }
+//     }
+
+//     updateNote(noteId, newValue) {
+//         let note = this.items.find(note => note.id === noteId);
+//         if (note) {
+//             note.update(newValue);
+//         }
+//     }
+// }
+
+// const myNotes = new Notes('Recipes');
 
 // myNotes.addNote({
-//   text: 'Моя друга замітка',
-//   priority: Notes.Priority.NORMAL,
+//     text: 'Моя перша замітка', 
+//     priority: Note.Priority.LOW 
 // });
-// console.log(myNotes.items);
+// myNotes.addNote({
+//     text: 'Моя друга замітка',
+//     priority: Note.Priority.NORMAL,
+//   });
+// myNotes.addNote({
+//     text: 'Моя третя замітка',
+//     priority: Note.Priority.NORMAL,
+// });
 
-// myNotes.removeNote('Моя перша замітка');
-// console.log(myNotes.items);
-
-// myNotes.updateNote('Моя друга замітка', Notes.Priority.HIGH);
-// console.log(myNotes.items);
+// console.log(myNotes);
 // ```
 
 // ## Example 5 - Toggle
