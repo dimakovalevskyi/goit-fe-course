@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    padding: 50px;
+}
+
+.container {
+    width: 300px;
+    background-color: grey;
+    margin: auto;
+    padding: 30px;
+}
+
+.title {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+input {
+    display: block;
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid black;
+    padding: 5px;
+    margin-top: 10px;
+}
+#price {
+    margin-bottom: 10px;
+}
+
+.text-right {
+    text-align: right;
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.amount {
+    background-color:blue;
+    display: inline-block;
+    padding: 1px 5px;
+    margin: 0 5px;
+    border-radius: 3px;
+    color: #fff;
+}
+
+
+.gallery {
+    max-width: 900px;
+    margin: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.gallery-item {
+    margin: 10px;
+    flex: 1 1;
+}
+.gallery-title {
+    text-align: center;
+}
+.gallery-picture {
+    display: block;
+    height: auto;
+    border-radius: 10px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+
+.modal-wrapper,
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.modal-backdrop {
+    z-index: 10000;
+    background: rgba(0, 0, 0, .7);
+}
+
+.modal-body {
+    position: relative;
+    margin: 50px auto;
+    max-width: 400px;
+    padding: 25px;
+    border-radius: 10px;
+    background-color: #fff;
+    z-index: 10100;
+}
+.modal-body h1 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+.modal-body img {
+    display: block;
+    max-width: 100%;
+}
+
+.modal-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    line-height: 1;
+    width: 20px;
+    height: 20px;
+    background: none;
+    border: none;
+    font-size: 20px;
+}
+
+.error {
+    color: rgb(255, 95, 95);
+}
