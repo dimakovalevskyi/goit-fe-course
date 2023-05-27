@@ -1,0 +1,40 @@
+.wrapper {
+    max-width: 400px;
+    margin: 0 auto;
+}
+.header {
+    background-color: #eee;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 40px;
+}
+
+.timer-label {
+    text-align: center;
+    margin-bottom: 15px;
+}
+.timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+.timer-part {
+    width: 75px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #eee;
+    border-radius: 10px;
+}
+.timer-part + .timer-part {
+    margin-left: 20px;
+}
+.timer-value {
+    font-size: 40px;
+}
+.timer-desc {
+    font-size: 12px;
+}
