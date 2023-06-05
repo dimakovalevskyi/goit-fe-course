@@ -8,18 +8,24 @@
 </head>
 <body>
     <div class="wrapper">
-        <form class="header">
+
+        <form id="form" class="header">
             <h1>Money Calculator</h1>
             <div class="row">
-                <input class="input" name="date" type="date">
-                <input class="input" name="amount" type="number">
-                <button class="submit">Get</button>
+                <input id="date" class="input" name="date" type="date" required>
+                <input id="amount" class="input" name="amount" type="number" required>
+                <button type="submit" class="submit">Get</button>
             </div>
         </div>
 
-        <div class="result hidden">
-            <h2>Розмір зарахування: <span class="value"></span></h2>
-            <h4>Курс в цей день: <span class="value"></span></h2>
+        <div id="result" class="result hidden">
+            <h2>Розмір зарахування: ₴ <span id="total" class="value"></span></h2>
+            <h4>Курс в цей день: $ <span id="currency" class="value"></span></h2>
+        </div>
+
+        <div id="placeholder" class="placeholder hidden">
+            <h2 class="placeholder-line"></h2>
+            <h4 class="placeholder-line"></h4>
         </div>
     </div>
     <script src="bundle.js"></script>

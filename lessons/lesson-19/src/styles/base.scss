@@ -9,8 +9,11 @@ body {
 h1, h2, h4 {
     text-align: center;
     margin-bottom: 10px;
+    font-weight: 100;
 }
-
+.value {
+    font-weight: 600;
+}
 .wrapper {
     max-width: 400px;
     margin: 0 auto;
@@ -34,4 +37,10 @@ h1, h2, h4 {
 }
 .submit {
     width: 75px;
+}
+
+.placeholder-line {
+    height: 1em;
+    background-color: #eee;
+    border-radius: 5px;
 }
