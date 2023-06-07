@@ -1,0 +1,57 @@
+html, body {
+    font-family: sans-serif;
+}
+
+body {
+    padding: 50px;
+}
+
+h1 {
+    text-align: center;
+    font-weight: 100;
+}
+h2 {
+    margin-bottom: 10px;
+    font-weight: 100;
+    a {
+        display: block;
+        color: currentColor;
+    }
+}
+h1, h2 {
+    font-weight: 100;
+}
+button {
+    padding: 0 5px
+}
+.wrapper {
+    max-width: 400px;
+    margin: 0 auto;
+}
+.header {
+    background-color: #eee;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 40px;
+}
+article {
+    margin-bottom: 40px;
+}
+.cover {
+    border-radius: 15px;
+    max-width: 100%;
+}
+.center {
+    text-align: center;
+}
+
+.row {
+    display: flex;
+}
+.input {
+    margin-right: 15px;
+    flex: 1 1 auto;
+}
+.submit {
+    width: 75px;
+}

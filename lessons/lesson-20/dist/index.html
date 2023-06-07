@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News</title>
+</head>
+<body>
+    <div class="wrapper">
+        <form id="form" class="header">
+            <h1>News</h1>
+            <div class="row">
+                <input id="theme" class="input" name="theme" type="text" required value="Ukraine">
+                <select id="perPage" class="input" name="perPage" required value="10">
+                    <option value="5">5 per page</option>
+                    <option value="10">10 per page</option>
+                    <option value="25">25 per page</option>
+                    <option value="50">50 per page</option>
+                    <option value="100">100 per page</option>
+                </select>
+                <button type="submit" class="submit">Get</button>
+            </div>
+        </form>
+
+        <div class="list">
+            <article>
+                <h2><a href="#">Hello world 1</a></h2>
+                <img class="cover" src="https://images.unsplash.com/photo-1682685797332-e678a04f8a64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80">
+                <p class="description">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean urna arcu, pharetra in suscipit a, feugiat sit amet ligula. Suspendisse potenti. Ut ipsum urna, tincidunt id est ut, ornare lobortis elit. Donec ac orci et turpis ultricies tempus. Etiam nec placerat turpis, ut vulputate ligula. Morbi id egestas neque. Integer et justo consectetur, placerat nibh vel, lacinia odio. Nullam non nisl dui. Maecenas ultricies nulla id erat commodo blandit. Curabitur vel ultrices dui, quis gravida quam. Cras venenatis dictum augue quis ultricies.
+                </p>
+            </article>
+            <article>
+                <h2>
+                    <a href="#">
+                        Hello world 1 Hello world 1 Hello world 1 Hello world 1 Hello world 1 Hello world 1 Hello world 1 
+                    </a>
+                </h2>
+                <img class="cover" src="https://images.unsplash.com/photo-1682685797332-e678a04f8a64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80">
+                <p class="description">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean urna arcu, pharetra in suscipit a, feugiat sit amet ligula. Suspendisse potenti. Ut ipsum urna, tincidunt id est ut, ornare lobortis elit. Donec ac orci et turpis ultricies tempus. Etiam nec placerat turpis, ut vulputate ligula. Morbi id egestas neque. Integer et justo consectetur, placerat nibh vel, lacinia odio. Nullam non nisl dui. Maecenas ultricies nulla id erat commodo blandit. Curabitur vel ultrices dui, quis gravida quam. Cras venenatis dictum augue quis ultricies.
+                </p>
+            </article>
+        </div>
+        <div class="center">
+            <button>Load More</button>
+        </div>
+    </div>
+    <script src="bundle.js"></script>
+</body>
+</html>
