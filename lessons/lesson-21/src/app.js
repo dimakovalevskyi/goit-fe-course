@@ -1,3 +1,5 @@
+// import axios from 'axios';
+
 export default class App {
     #items = [];
 
@@ -5,6 +7,7 @@ export default class App {
         this.addInput = document.querySelector('#addInput');
         this.addButton = document.querySelector('#addButton');
         this.listEl = document.querySelector('#list');
+        this.baseApiUrl = 'http://localhost:3000';
 
         this.#bindEvents();
 
@@ -12,7 +15,8 @@ export default class App {
     }
 
     #bindEvents() {
-        this.addButton.addEventListener('click', () => {
+        this.addButton.addEventListener('click', (event) => {
+            event.preventDefault();
             this.addItem(this.addInput.value.trim());
             this.addInput.value = '';
         });
@@ -36,18 +40,49 @@ export default class App {
         if (!item) {
             return;
         }
-        if (typeof item === 'string') {
-            item = {
-                id: Date.now(),
-                completed: false,
-                content: item,
-            };
-        }
+        let body = {
+            completed: false,
+            content: item,
+        };
+
+        fetch(this.baseApiUrl + '/items', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        }).then(res => res.json())
+            .then(item => this.addItemInView(item))
+            .catch(e => alert('Error while creating item'));
+
+        // axios.post(this.baseApiUrl + '/items', body)
+        //     .then(res => this.addItemInView(res.data))
+        //     .catch(e => alert('Error while creating item'));
+    }
+
+    // doRequest(this.baseApiUrl + '/items', 'POST', body)
+    //     .then(item => this.addItemInView(item))
+    //     .catch(e => alert('Error while creating item'));
+    // doRequest(url, method = 'GET', body = null) {
+    //     let params = {
+    //         method: method,
+    //     };
+
+    //     if (body && typeof body === 'object') {
+    //         params.headers = {
+    //             'Content-Type': 'application/json'
+    //         };
+    //         params.body = JSON.stringify(body);
+    //     }
+
+    //     return fetch(url, params)
+    //         .then(res => res.json());
+    // }
+
+    addItemInView(item) {
         this.#items.push(item);
         let element = this.createElForItem(item);
         this.listEl.append(element);
-
-        this.save();
     }
 
     removeItem(id) {
@@ -55,17 +90,36 @@ export default class App {
             id = Number(id);
         }
 
+        fetch(`${this.baseApiUrl}/items/${id}`, {
+            method: 'DELETE'
+        }).then(res => {
+            if (res.ok) {
+                this.removeItemFromView(id);
+            } else {
+                alert('Error while removing item');
+            }
+        });
+
+        // fetch(`${this.baseApiUrl}/itemsss/${id}`, {
+        //     method: 'DELETE'
+        // }).then(res => {
+        //     if (!res.ok) {
+        //         throw new Error();
+        //     }
+        // })
+        // .then(() => this.removeItemFromView(id))
+        // .catch(() => alert('Error while removing item'));
+    }
+
+    removeItemFromView(id) {
         let itemIndex = this.#items.findIndex(i => i.id === id);
         if (itemIndex >= 0) {
             this.#items.splice(itemIndex, 1);
         }
-
         let itemEl = document.querySelector(`[data-item-id="${id}"]`);
         if (itemEl) {
             itemEl.remove();
         }
-
-        this.save();
     }
 
     markItemAsChecked(id) {
@@ -81,7 +135,6 @@ export default class App {
                 itemEl.classList.add('item_done');
             }
         }
-        this.save();
     }
 
     markItemAsUnchecked(id) {
@@ -97,22 +150,14 @@ export default class App {
                 itemEl.classList.remove('item_done');
             }
         }
-        this.save();
-    }
-
-    save() {
-        let data = JSON.stringify(this.#items);
-        localStorage.setItem('items', data);
     }
 
     load() {
-        try {
-            let data = localStorage.getItem('items');
-            let items = JSON.parse(data);
-            items.forEach(i => this.addItem(i));
-        } catch (e) {
-            console.error('Wow, error!!!');
-        }
+        fetch(this.baseApiUrl + '/items')
+            .then(res => res.json())
+            .then(items => items.forEach(i => this.addItemInView(i)))
+            .catch(e => alert('Error while loading all items'));
+
     }
 
     createElForItem(item) {
