@@ -1,3 +1,14 @@
 {
-  "items": []
+  "items": [
+    {
+      "completed": false,
+      "content": "Item 2",
+      "id": 2
+    },
+    {
+      "completed": false,
+      "content": "Test 0",
+      "id": 3
+    }
+  ]
 }

@@ -1,5 +1,7 @@
 // import axios from 'axios';
 
+import { create, loadAll, removeById } from "./api";
+
 export default class App {
     #items = [];
 
@@ -7,7 +9,6 @@ export default class App {
         this.addInput = document.querySelector('#addInput');
         this.addButton = document.querySelector('#addButton');
         this.listEl = document.querySelector('#list');
-        this.baseApiUrl = 'http://localhost:3000';
 
         this.#bindEvents();
 
@@ -36,24 +37,30 @@ export default class App {
         });
     }
 
-    addItem(item) {
+    async addItem(item) {
         if (!item) {
             return;
         }
-        let body = {
+        let itemData = {
             completed: false,
             content: item,
         };
+        try {
+            let item = await create(itemData);
+            this.addItemInView(item);
+        } catch (e) {
+            alert('Error while creating item');
+        }
 
-        fetch(this.baseApiUrl + '/items', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(body)
-        }).then(res => res.json())
-            .then(item => this.addItemInView(item))
-            .catch(e => alert('Error while creating item'));
+        // fetch(this.baseApiUrl + '/items', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(body)
+        // }).then(res => res.json())
+        //     .then(item => this.addItemInView(item))
+        //     .catch(e => alert('Error while creating item'));
 
         // axios.post(this.baseApiUrl + '/items', body)
         //     .then(res => this.addItemInView(res.data))
@@ -85,20 +92,36 @@ export default class App {
         this.listEl.append(element);
     }
 
-    removeItem(id) {
+    async removeItem(id) {
         if (typeof id === 'string') {
             id = Number(id);
         }
 
-        fetch(`${this.baseApiUrl}/items/${id}`, {
-            method: 'DELETE'
-        }).then(res => {
-            if (res.ok) {
-                this.removeItemFromView(id);
-            } else {
-                alert('Error while removing item');
-            }
-        });
+        try {
+            await removeById(id);
+            this.removeItemFromView(id);
+        } catch (e) {
+            alert('Error while removing item');
+        }
+
+        // let res = await fetch(`${this.baseApiUrl}/items/${id}`, {
+        //     method: 'DELETE'
+        // });
+        // if (res.ok) {
+        //     this.removeItemFromView(id);
+        // } else {
+        //     alert('Error while removing item');
+        // }
+
+        // fetch(`${this.baseApiUrl}/items/${id}`, {
+        //     method: 'DELETE'
+        // }).then(res => {
+        //     if (res.ok) {
+        //         this.removeItemFromView(id);
+        //     } else {
+        //         alert('Error while removing item');
+        //     }
+        // });
 
         // fetch(`${this.baseApiUrl}/itemsss/${id}`, {
         //     method: 'DELETE'
@@ -152,12 +175,13 @@ export default class App {
         }
     }
 
-    load() {
-        fetch(this.baseApiUrl + '/items')
-            .then(res => res.json())
-            .then(items => items.forEach(i => this.addItemInView(i)))
-            .catch(e => alert('Error while loading all items'));
-
+    async load() {
+        try {
+            let items = await loadAll();
+            items.forEach(i => this.addItemInView(i));
+        } catch(e) {
+            alert('Error while loading all items');
+        }
     }
 
     createElForItem(item) {
