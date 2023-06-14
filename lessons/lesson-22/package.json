@@ -1,0 +1,30 @@
+{
+  "name": "lesson-22",
+  "version": "0.0.1",
+  "description": "ToDo List v3",
+  "private": true,
+  "scripts": {
+    "build": "npx webpack --config webpack.config.js",
+    "dev": "npx webpack --config webpack.config.js --watch",
+    "db": "npx json-server --watch db.json",
+    "dev_server": "cd dist && browser-sync --port 5500",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mosby",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.21.8",
+    "@babel/preset-env": "^7.21.5",
+    "babel-loader": "^9.1.2",
+    "css-loader": "^6.7.4",
+    "json-server": "^0.17.3",
+    "sass": "^1.62.1",
+    "sass-loader": "^13.3.0",
+    "style-loader": "^3.3.3",
+    "webpack": "^5.83.1",
+    "webpack-cli": "^5.1.1"
+  },
+  "dependencies": {
+    "axios": "^1.4.0"
+  }
+}
